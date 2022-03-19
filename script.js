@@ -1,14 +1,11 @@
 /*A Rock Paper Scissors Game!*/
 
-let computerResponse = getRandomInt(1, 3); /* assign a number 1-3 for the computer's choice*/
-let computerResult = computerPlay();
-let humanInput = prompt('Rock, Paper, or Scissors?');
-let humanResult = humanInput.toLowerCase();
 
 
 
 
-function computerPlay() {
+function computerPlay(computerResponse) {
+    computerResponse = getRandomInt(1, 3);
     if (computerResponse == 1) {
         return 'rock';
     } else if (computerResponse == 2) {
@@ -22,22 +19,25 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min); /* returns numbers 1, 2, or 3 randomly */
 }
 
+
 function game() {
-    if (computerResult == 'rock' && humanResult == 'paper') {
-        return 'You Win!!!';
-    } else if (computerResult == 'rock' && humanResult == 'scissors') {
-        return 'You Lose! Try Again.';
-    } else if (computerResult == 'paper' && humanResult == 'scissors') {
-        return 'You Win!!!';
-    } else if (computerResult == 'paper' && humanResult == 'rock') {
-        return 'You Lose! Try Again.';
-    } else if (computerResult == 'scissors' && humanResult == 'rock') {
-        return 'You Win!!!';
-    } else if (computerResult == 'scissors' && humanResult == 'paper') {
-        return 'You Lose! Try Again.';
-    } else {
-        return "It's a tie!"
-    }
+    for (let i = 0; i < 5; i++) {
+        console.log(playRound());
+        console.log('Game ' + (i + 1) + '/5');
+     }
 }
 
-console.log(game());
+game();
+
+function playRound(humanResult, ComputerResult) {
+    let humanInput = prompt('Rock, Paper, or Scissors?');
+    humanResult = humanInput.toLowerCase();
+    computerResult = computerPlay();
+    if ((computerResult == 'rock' && humanResult == 'paper') || (computerResult == 'paper' && humanResult == 'scissors') || (computerResult == 'scissors' && humanResult == 'rock')) {
+        return 'You Win!!!';
+    } else if ((computerResult == 'paper' && humanResult == 'rock') || (computerResult == 'scissors' && humanResult == 'paper') || (computerResult == 'rock' && humanResult == 'scissors')) {
+        return 'You Lose! Try Again.';
+    } else {
+        return "It's a tie!";
+    }
+    }
