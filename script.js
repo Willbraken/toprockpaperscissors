@@ -1,8 +1,7 @@
 /*A Rock Paper Scissors Game!*/
 
-
-
-
+let compWin = 0;
+let humanWin = 0;
 
 function computerPlay(computerResponse) {
     computerResponse = getRandomInt(1, 3);
@@ -22,9 +21,16 @@ function getRandomInt(min, max) {
 
 function game() {
     for (let i = 0; i < 5; i++) {
-        console.log(playRound());
+        playRound();
         console.log('Game ' + (i + 1) + '/5');
      }
+    if (humanWin > compWin) {
+        console.log('You win overall!');
+    } else if (compWin > humanWin) {
+        console.log('You lose overall!');
+    } else {
+        console.log('Overall tie.');
+    }
 }
 
 game();
@@ -34,10 +40,12 @@ function playRound(humanResult, ComputerResult) {
     humanResult = humanInput.toLowerCase();
     computerResult = computerPlay();
     if ((computerResult == 'rock' && humanResult == 'paper') || (computerResult == 'paper' && humanResult == 'scissors') || (computerResult == 'scissors' && humanResult == 'rock')) {
-        return 'You Win!!!';
+        console.log('You Win!!!');
+        return ++humanWin;
     } else if ((computerResult == 'paper' && humanResult == 'rock') || (computerResult == 'scissors' && humanResult == 'paper') || (computerResult == 'rock' && humanResult == 'scissors')) {
-        return 'You Lose! Try Again.';
+        console.log('You Lose! Try Again.');
+        return ++compWin;
     } else {
-        return "It's a tie!";
+        console.log("It's a tie!");
     }
     }
