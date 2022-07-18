@@ -9,12 +9,15 @@ const container = document.querySelector('#container');
 
 const gameResult = document.createElement('p');
 gameResult.classList.add('gameResult');
+container.appendChild(gameResult);
 
 const gameText = document.createElement('p');
 gameText.classList.add('gameText');
+container.appendChild(gameText);
 
 const overallWin = document.createElement('p');
 overallWin.classList.add('overallWin');
+container.appendChild(overallWin);
 
 choice.forEach((button) => {
     button.addEventListener('click', () => {
@@ -41,30 +44,23 @@ function getRandomInt(min, max) {
 function game() {
     if(humanWin > compWin && numGames === 5) {
         overallWin.textContent = 'You Win Overall!';
-        container.appendChild(overallWin);
     } else if(compWin > humanWin && numGames === 5) {
         overallWin.textContent = 'You Lose Overall';
-        container.appendChild(overallWin);
     } else if(compWin === humanWin && numGames ===5) {
         overallWin.textContent = 'Overall Tie';
-        container.appendChild(overallWin);
     } else;
     gameText.textContent = 'Game ' + numGames + "/5";
-    container.appendChild(gameText);
 }
 
 function playRound(humanResult, computerResult) {
     computerResult = computerPlay();
     if ((computerResult == 'rock' && humanResult == 'paper') || (computerResult == 'paper' && humanResult == 'scissors') || (computerResult == 'scissors' && humanResult == 'rock')) {
         gameResult.textContent = 'You Win!!!';
-        container.appendChild(gameResult);
         return ++humanWin;
     } else if ((computerResult == 'paper' && humanResult == 'rock') || (computerResult == 'scissors' && humanResult == 'paper') || (computerResult == 'rock' && humanResult == 'scissors')) {
         gameResult.textContent = 'You Lose! Try Again.';
-        container.appendChild(gameResult);
         return ++compWin;
     } else {
         gameResult.textContent = "It's a tie!";
-        container.appendChild(gameResult);
     }
     }
